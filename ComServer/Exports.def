@@ -1,0 +1,9 @@
+; Exports.def: объявляет параметры модуля ComServer.dll.
+
+LIBRARY
+
+EXPORTS
+	DllCanUnloadNow			PRIVATE
+	DllGetClassObject		PRIVATE
+	DllRegisterServer		PRIVATE
+	DllUnregisterServer		PRIVATE
