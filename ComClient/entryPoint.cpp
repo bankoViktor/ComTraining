@@ -93,12 +93,13 @@ int main()
         std::wcout << std::endl;
 
         ULONG cRef = pICalc->Release();
-        std::cout << "Release interface: ICalculator, Ref=" << cRef << "\n";
+        std::cout << "Release interface: ICalculator, Ref=" << cRef << std::endl;
     }
     else
     {
         printErrorMessage(L"FAILED", hr);
     }
+    std::wcout << std::endl;
 
     std::wcout << L"Uninitialized" << std::endl;
     CoUninitialize();
