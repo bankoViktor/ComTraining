@@ -19,7 +19,7 @@ HRESULT __stdcall CoCalculator::QueryInterface(const IID& iid, void** ppv)
     if (iid == IID_IUnknown)
         *ppv = (IUnknown_*)this;
     else if (iid == IID_ICalculator)
-        *ppv = (ICalculator*)this;
+        *ppv = (ICalculator_*)this;
     else
     {
         *ppv = NULL;

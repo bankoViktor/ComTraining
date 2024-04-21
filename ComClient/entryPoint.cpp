@@ -5,7 +5,11 @@
 #include <Windows.h>
 #include <string>
 
-#include "CoCalculator.h"
+// For ComServer
+#include "../ComServer/CoCalculator.h"
+#include "../ComServer/Interfaces.h"
+#define ICalculator         ICalculator_
+
 
 // For _com_error
 #pragma comment(lib, "RuntimeObject.lib")

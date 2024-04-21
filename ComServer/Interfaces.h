@@ -6,7 +6,7 @@
 extern "C" static const GUID IID_ICalculator =
 { 0x7fa6bd16, 0xf8c8, 0x4f86, { 0xa2, 0x40, 0xe5, 0xbd, 0xb4, 0xd2, 0x54, 0xef } };
 
-interface ICalculator : public IUnknown_
+interface ICalculator_ : public IUnknown_
 {
     virtual HRESULT __stdcall Sum(DOUBLE a, DOUBLE b, DOUBLE* res) = 0;
     virtual HRESULT __stdcall Sub(DOUBLE a, DOUBLE b, DOUBLE* res) = 0;

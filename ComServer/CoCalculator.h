@@ -6,7 +6,7 @@
 static const GUID CLSID_CoCalculator =
 { 0x921f2d2c, 0x9752, 0x4bc7, { 0xab, 0x2e, 0xe5, 0xfb, 0x39, 0xd1, 0x65, 0xb5 } };
 
-class CoCalculator : public ICalculator
+class CoCalculator : public ICalculator_
 {
     friend HRESULT __stdcall DllCanUnloadNow();
 
