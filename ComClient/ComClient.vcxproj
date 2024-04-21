@@ -22,7 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{78f24018-ce55-48f7-9bf6-6cf03df1874e}</ProjectGuid>
-    <RootNamespace>HardCOM</RootNamespace>
+    <RootNamespace>ComClient</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>ComClient</ProjectName>
   </PropertyGroup>
