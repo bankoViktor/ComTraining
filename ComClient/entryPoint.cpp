@@ -14,17 +14,10 @@
 #include "../ComServer.ATL/ComServerATL_i.h"
 #include "../ComServer.ATL/ComServerATL_i.c"
 
-// For _com_error
-#pragma comment(lib, "RuntimeObject.lib")
-#undef WINAPI_PARTITION_DESKTOP
-#include <comdef.h>
 
-void printErrorMessage(const CHAR* pszMessage, HRESULT hr)
+void printErrorMessage(LPCWSTR pszMessage, HRESULT hr)
 {
-    std::wstring error(_com_error(hr, NULL).ErrorMessage());
-    std::cout << pszMessage;
-    std::wcout << L" :: " << error.substr(0, error.size() - 2);
-    std::cout << std::endl;
+    std::wcout << pszMessage << L" :: Error 0x" << std::hex << hr;
 }
 
 int main()
@@ -37,57 +30,77 @@ int main()
     hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED);
     if (!SUCCEEDED(hr))
     {
-        printErrorMessage("Initialize failed", hr);
+        printErrorMessage(L"Initialize failed", hr);
         return 1;
     }
-    std::cout << "Initialized" << "\n";
+    std::wcout << L"Initialized" << std::endl;
 
+    std::wcout << L"Create CoCalculator object and get interface ICalculator";
     ICalculator* pICalc = NULL;
     hr = CoCreateInstance(CLSID_CoCalculator, NULL, CLSCTX_INPROC_SERVER, IID_ICalculator, (void**)&pICalc);
     if (SUCCEEDED(hr))
     {
-        std::cout << "Query interface: ICalculator" << "\n";
+        std::wcout << std::endl;
         DOUBLE dResult = 0;
 
-        hr = pICalc->Sum(5, 1, &dResult);
-        if (SUCCEEDED(hr))
-            std::cout << "Run Calculator operation: Sum => 5 + 1 = " << dResult << "\n";
-        else
-            printErrorMessage("Faild Calculator Sum operation", hr);
+        double nA = 5;
+        double nB = 3;
 
-        hr = pICalc->Sub(5, 1, &dResult);
+        // SUM
+        std::wcout << L"Call Calculator.Sum(" << nA << L" + " << nB << L") = ";
+        hr = pICalc->Sum(nA, nB, &dResult);
         if (SUCCEEDED(hr))
-            std::cout << "Run Calculator operation: Sub => 5 - 1 = " << dResult << "\n";
+            std::wcout << dResult;
         else
-            printErrorMessage("Faild Calculator Sub operation", hr);
+            printErrorMessage(L"FAILD", hr);
+        std::wcout << std::endl;
 
-        hr = pICalc->Mul(5, 3, &dResult);
+        // SUB
+        std::wcout << L"Call Calculator.Sub(" << nA << L" - " << nB << L") = ";
+        hr = pICalc->Sub(nA, nB, &dResult);
         if (SUCCEEDED(hr))
-            std::cout << "Run Calculator operation: Mul => 5 * 3 = " << dResult << "\n";
+            std::wcout << dResult;
         else
-            printErrorMessage("Faild Calculator Mul operation", hr);
+            printErrorMessage(L"FAILD", hr);
+        std::wcout << std::endl;
 
-        hr = pICalc->Div(5, 3, &dResult);
+        // MUL
+        std::wcout << L"Call Calculator.Mul(" << nA << L" * " << nB << L") = ";
+        hr = pICalc->Mul(nA, nB, &dResult);
         if (SUCCEEDED(hr))
-            std::cout << "Run Calculator operation: Div => 5 / 3 = " << dResult << "\n";
+            std::wcout << dResult;
         else
-            printErrorMessage("Faild Calculator Div operation", hr);
+            printErrorMessage(L"FAILD", hr);
+        std::wcout << std::endl;
 
-        hr = pICalc->Div(5, 0, &dResult);
+        // DIV
+        std::wcout << L"Call Calculator.Div(" << nA << L" / " << nB << L") = ";
+        hr = pICalc->Div(nA, nB, &dResult);
         if (SUCCEEDED(hr))
-            std::cout << "Run Calculator operation: Div => 5 / 0 = " << dResult << "\n";
+            std::wcout << dResult;
         else
-            printErrorMessage("Faild Calculator Div operation", hr);
+            printErrorMessage(L"FAILD", hr);
+        std::wcout << std::endl;
+
+        // DIV on 0
+        nB = 0;
+        std::wcout << L"Call Calculator.Div(" << nA << L" / " << nB << L") = ";
+        hr = pICalc->Div(nA, nB, &dResult);
+        if (SUCCEEDED(hr))
+            std::wcout << dResult;
+        else
+            printErrorMessage(L"FAILD", hr);
+        std::wcout << std::endl;
 
         ULONG cRef = pICalc->Release();
         std::cout << "Release interface: ICalculator, Ref=" << cRef << "\n";
     }
     else
     {
-        printErrorMessage("Create instance: CLSID_CoCalculator", hr);
+        printErrorMessage(L"FAILED", hr);
     }
 
-    std::cout << "Uninitialized" << "\n";
+    std::wcout << L"Uninitialized" << std::endl;
     CoUninitialize();
 
     system("pause");
