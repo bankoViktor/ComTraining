@@ -1,0 +1,42 @@
+﻿// ComServer.ATL.idl: источник языка IDL для ComServer.ATL
+//
+
+// Этот файл будет обработан средством MIDL для
+// создание библиотеки типов ($handlersafeidlname$.tlb) и кода маршалирования.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+    object,
+    uuid(7FA6BD16-F8C8-4F86-A240-E5BDB4D254EF),
+    dual,
+    nonextensible,
+    pointer_default(unique)
+]
+interface ICalculator : IDispatch
+{
+    [id(1)] HRESULT Sum([in] DOUBLE a, [in] DOUBLE b, [out] DOUBLE* res);
+    [id(2)] HRESULT Sub([in] DOUBLE a, [in] DOUBLE b, [out] DOUBLE* res);
+    [id(3)] HRESULT Mul([in] DOUBLE a, [in] DOUBLE b, [out] DOUBLE* res);
+    [id(4)] HRESULT Div([in] DOUBLE a, [in] DOUBLE b, [out] DOUBLE* res);
+};
+
+[
+    uuid(5ccf61f3-db1e-42b7-9e09-c54899e7ff4a),
+    version(1.0),
+]
+library ComServerATLLib
+{
+    importlib("stdole2.tlb");
+    [
+        uuid(921F2D2C-9752-4BC7-AB2E-E5FB39D165B5)
+    ]
+
+    coclass CoCalculator
+    {
+        [default] interface ICalculator;
+    };
+};
+
+import "shobjidl.idl";

@@ -6,10 +6,13 @@
 #include <string>
 
 // For ComServer
-#include "../ComServer/CoCalculator.h"
-#include "../ComServer/Interfaces.h"
-#define ICalculator         ICalculator_
+//#include "../ComServer/CoCalculator.h"
+//#include "../ComServer/Interfaces.h"
+//#define ICalculator         ICalculator_
 
+// For ComServer.ATL
+#include "../ComServer.ATL/ComServerATL_i.h"
+#include "../ComServer.ATL/ComServerATL_i.c"
 
 // For _com_error
 #pragma comment(lib, "RuntimeObject.lib")
